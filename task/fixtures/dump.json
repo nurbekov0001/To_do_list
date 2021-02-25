@@ -1,0 +1,11 @@
+[
+{
+  "model": "webapp.task",
+  "pk": 1,
+  "fields": {
+    "description": "fedfdv",
+    "status": "new",
+    "date_done": null
+  }
+}
+]

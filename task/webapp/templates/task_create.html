@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Create</title>
+    <style type="text/css">
+        .container {
+            margin: 0 auto;
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+            background-color: brown;
+        }
+        </style>
 </head>
 <body>
-<h1>Create Article</h1>
+<div class="container">
+<h1>Введите Задачу </h1>
 <form action="/task/add/" method="post">
     {% csrf_token %}
     <label>Description:</label><br/>
     <textarea name="description"></textarea><br/>
     <label>Status:</label><br/>
-    <select name="category">
-     <option value="new">Новая</option>
-        <option value="in_progress">В процесе</option>
-    <option value="done">сделано</option>
+    <select name="status" id="">
+        {% for i in stat %}
+        <option>{{ i.0}}</option>
+  {% endfor %}
     </select>
-    <br/> <br/>
+    <br/><br/>
+    <label> Дату введите в формате "YYYY-mm-dd"</label><br/>
+    <input type="text" name="date_done"><br/><br/>
     <input type="submit" value="Send"/>
 </form>
+</div>
 </body>
 </html>
