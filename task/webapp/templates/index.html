@@ -1,34 +1,5 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hello</title>
-    <link rel="stylesheet" href="{% static "css/style.css" %}">
-        <style type="text/css">
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            color: #444444;
-
-        }
-
-        .container {
-            margin: 0 auto;
-            width: 100%;
-            max-width: 900px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-
+{% extends "base.html" %}
+{% block content %}
     <h1>To-Do list</h1>
     {% if not tasks %}
         <h2>НЕТ Задач</h2>
@@ -43,7 +14,4 @@
         <br/>
     {% endfor %}
     <a href="{% url "task_add"  %}">Создать задачу</a>
-
-</div>
-</body>
-</html>
+{% endblock %}
