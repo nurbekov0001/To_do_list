@@ -19,14 +19,19 @@
         </style>
 </head>
 <body>
+
     <br>
+
     <br>
     <div class="container">
-    <h1>Task {{ task.id }}</h1>
+
+        <h1>Task {{ task.id }}</h1>
     <p>Description: {{ task.description}}</p>
+        <p>Detailed description: {{ task.detailed_description}}</p>
     <p>Status: {{ task.status }}</p>
     <p>Data: {{ task.date_done }}</p>
-</div>
+    <a href="{% url "task_list" %}">Главная страница</a>
+    </div>
 
 </body>
 </html>

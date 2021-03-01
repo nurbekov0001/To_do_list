@@ -22,6 +22,8 @@
     {% csrf_token %}
     <label>Description:</label><br/>
     <textarea name="description"></textarea><br/>
+    <label>Detailed description:</label><br/>
+    <textarea name="detailed_description"></textarea><br/>
     <label>Status:</label><br/>
     <select name="status" id="">
         {% for i in stat %}
@@ -32,6 +34,9 @@
     <label> Дату введите в формате "YYYY-mm-dd"</label><br/>
     <input type="text" name="date_done"><br/><br/>
     <input type="submit" value="Send"/>
+<br/>
+<br/>
+    <a href="{% url "task_list" %}">Главная страница</a>
 </form>
 </div>
 </body>

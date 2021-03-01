@@ -35,14 +35,14 @@
     {% endif %}
 
     {% for task in tasks %}
-        <p>{{ task.author }}<a href="/task/{{ task.id }}"> Описание: {{ task.description }}</a><br/>
+        <p>{{ task.author }}<a href="{% url "task_view" task.id %}"> Описание: {{ task.description }}</a><br/>
            Статус: {{ task.status }}<br/>
             Дата: {{ task.date_done }}<br/>
             </p>
         <br/>
         <br/>
     {% endfor %}
-    <a href="/task/add">Создать задачу</a>
+    <a href="{% url "task_add"  %}">Создать задачу</a>
 
 </div>
 </body>
