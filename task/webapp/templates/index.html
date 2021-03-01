@@ -35,7 +35,7 @@
     {% endif %}
 
     {% for task in tasks %}
-        <p>{{ task.author }}<a href="/task?id={{ task.id }}"> Описание: {{ task.description }}</a><br/>
+        <p>{{ task.author }}<a href="/task/{{ task.id }}"> Описание: {{ task.description }}</a><br/>
            Статус: {{ task.status }}<br/>
             Дата: {{ task.date_done }}<br/>
             </p>

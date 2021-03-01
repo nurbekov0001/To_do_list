@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from webapp.models import Task, STATUS_CHOICES
 
 
@@ -8,9 +10,9 @@ def index_view(request):
     return render(request, 'index.html', context={'tasks': tasks})
 
 
-def task_view(request):
+def task_view(request, pk):
     task_id = request.GET.get('id')
-    task = Task.objects.get(id=task_id)
+    task = Task.objects.get(id=pk)
     return render(request, 'task_view.html', context={'task': task})
 
 
@@ -28,6 +30,7 @@ def task_create_view(request):
             date_done=date_done
         )
 
-        return render(request, 'task_view.html', context={'task': task})
+        return HttpResponseRedirect(f'')
+        # return render(request, 'task_view.html', context={'task': task})
 
 # Create your views here.
