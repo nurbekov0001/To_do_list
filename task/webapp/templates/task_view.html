@@ -9,6 +9,10 @@
     <p>Description: {{ task.description}}</p>
         <p>Detailed description: {{ task.detailed_description}}</p>
     <p>Status: {{ task.status }}</p>
-    <p>Data: {{ task.date_done }}</p>
+    {%if task.date_done == None %}
+         <p>дату не вводили <p>
+    {% else %}
+        <p>Data: {{task.date_done}} </p>
+    {% endif %}
     <a href="{% url "task_list" %}">Главная страница</a>
 {% endblock %}

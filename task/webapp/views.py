@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-
 from webapp.models import Task, STATUS_CHOICES
 
 
@@ -22,7 +21,8 @@ def task_create_view(request):
         status = request.POST.get("status")
         date_done = request.POST.get("date_done")
         detailed_description = request.POST.get("detailed_description")
-
+        if not date_done:
+            date_done = None
         task = Task.objects.create(
             description=description,
             detailed_description=detailed_description,
