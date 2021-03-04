@@ -1,11 +1,17 @@
+
+
 {% extends "base.html" %}
-{#{% block nav %}#}
-{#    <a class="navbar-brand" href="{% url "task_add" %}">  Удалить </a>#}
-{#{% endblock %}#}
+
+{% block menu %}
+
+    <li><a href="{% url "task_update" task.id %}">Редактировать статью</a></li>
+    <li><a href="{% url "task_delete" task.id %}">Удалить статью</a></li>
+{% endblock menu %}
+
+{% block page_header %}Статья {{ task.id }}{% endblock page_header %}
+
 {% block content %}
-    <br>
-    <br>
-        <h1>Task {{ task.id }}</h1>
+
     <p>Description: {{ task.description}}</p>
         <p>Detailed description: {{ task.detailed_description}}</p>
     <p>Status: {{ task.status }}</p>

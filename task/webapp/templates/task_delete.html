@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Подтвердите удаление статьи{% endblock %}
+{% block page_header %}Вы уверены, что хотите удалить статью {{ task.title }}?{% endblock page_header %}
+
+{% block content%}
+    <form action="{% url "task_delete" task.id %}", method="POST">
+        {% include 'task_form.html' with button_text="Да, я хочу удалить статью" %}
+        <a href="{% url "task_view" task.id %}">Отмена. Код красный. КОД КРАСНЫЙ!!</a>
+    </form>
+{% endblock content %}

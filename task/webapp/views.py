@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from webapp.models import Task, STATUS_CHOICES
+from webapp.forms import TaskForm, TaskDeleteForm
+
 
 
 def index_view(request):
@@ -15,20 +17,61 @@ def task_view(request, pk):
 
 def task_create_view(request):
     if request.method == "GET":  # Если метод запроса GET - будет отображена форма создания статьи
+        form = TaskForm()
         return render(request, 'task_create.html', {'stat': STATUS_CHOICES})
     elif request.method == "POST":  # Если метод запроса POST - будет отображён шаблон просмотра деталей статьи
-        description = request.POST.get("description")
-        status = request.POST.get("status")
-        date_done = request.POST.get("date_done")
-        detailed_description = request.POST.get("detailed_description")
-        if not date_done:
-            date_done = None
-        task = Task.objects.create(
-            description=description,
-            detailed_description=detailed_description,
-            status=status,
-            date_done=date_done
-        )
+        form = TaskForm(data=request.POST)
 
-        return redirect(reverse('task_view', kwargs={'pk': task.id}))
-# Create your views here.
+        if form.is_valid():
+            task = Task.objects.create(
+            description =form.cleaned_data.get("description"),
+            status = form.cleaned_data.get("status"),
+            date_done = form.cleaned_data.get("date_done"),
+            detailed_description = form.cleaned_data.get("detailed_description")
+            )
+
+            return redirect('article-view',pk=task.id)
+        return render(request, 'task_create.html',context={'form': form})
+
+
+
+def task_update_view(request, pk):
+    task = get_object_or_404(Task, id=pk)
+
+    if request.method == 'GET':
+        form = TaskForm(initial={
+            'description': task.description,
+            'detailed_description': task.detailed_description,
+            'status': task.status,
+            'date_done': task.date_done
+            })
+        return render(request, 'task_update.html',context={'form': form, 'task': task})
+    elif request.method == 'POST':
+        form = TaskForm(data=request.POST)
+        if form.is_valid():
+            task.description = form.cleaned_data.get("description")
+            task.detailed_description = form.cleaned_data.get("detailed_description")
+            task.status = form.cleaned_data.get("status")
+            task.date_done = form.cleaned_data.get("date_done")
+            task.save()
+            return redirect('article-view', pk=task.id)
+        return render(request, 'task_update.html', context={'form': form, 'task': task})
+
+
+def task_delete_view(request, pk):
+    task = get_object_or_404(Task, id=pk)
+
+    if request.method == 'GET':
+        form = TaskDeleteForm()
+        return render(request, 'task_delete.html', context={'task': task, 'form': form})
+    elif request.method == 'POST':
+        form = TaskDeleteForm(data=request.POST)
+        if form.is_valid():
+            if form.cleaned_data['description'] != task.description:
+                form.errors['description'] = ['Названия статей не совпадают']
+                return render(request, 'task_delete.html', context={'task': task, 'form': form})
+            task.delete()
+            return redirect('task_list')
+        return render(request, 'task_delete.html', context={'task': task, 'form': form})
+
+
