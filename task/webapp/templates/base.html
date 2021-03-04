@@ -12,15 +12,11 @@
 <body>
     <nav class="navbar">
         <ul class="menu">
-            <li><a href="{% url "task_list" %}">Все статьи</a></li>
-                <li><a href="{% url "task_add" %}">Создать статью</a></li>
+            <li><a href="{% url "task_list" %}">Все задачи</a></li>
+                <li><a href="{% url "task_add" %}">Создать задачу</a></li>
             {% block menu %}{% endblock %}
         </ul>
     </nav>
 
-    <div class="container">
-        <h1>{% block page_header %}Лучшие статьи в мире!{% endblock page_header %}</h1>
-        {% block content %}{% endblock content %}
-    </div>
 </body>
 </html>

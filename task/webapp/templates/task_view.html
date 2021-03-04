@@ -4,8 +4,8 @@
 
 {% block menu %}
 
-    <li><a href="{% url "task_update" task.id %}">Редактировать статью</a></li>
-    <li><a href="{% url "task_delete" task.id %}">Удалить статью</a></li>
+    <li><a href="{% url "task_update" task.id %}">Редактировать задачу</a></li>
+    <li><a href="{% url "task_delete" task.id %}">Удалить задачу</a></li>
 {% endblock menu %}
 
 {% block page_header %}Статья {{ task.id }}{% endblock page_header %}

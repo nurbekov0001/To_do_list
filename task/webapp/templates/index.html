@@ -11,24 +11,3 @@
     {% endfor %}
     <a href="{% url "task_add"  %}">Создать задачу</a>
 {% endblock %}
-
-
-{#{% extends 'base.html' %}#}
-{##}
-{#{% block menu %}<li><a href="{% url "task_list" %}">Создать задачу </a></li>{% endblock menu %}#}
-{##}
-{#{% block description %}Все статьи{% endblock description %}#}
-{##}
-{#{% block page_header %}Все статьи{% endblock page_header %}#}
-{##}
-{#{% block content %}#}
-{#    {% if not tasks %}#}
-{#        <h2>НЕТ СТАТЕЙ</h2>#}
-{#    {% endif %}#}
-{##}
-{#    {% for task in tasks %}  {# Перебираем список статей циклом #}
-        {# Создаём абзац, в котором отображем автора статьи и заголовок статьи, обёрнутый в ссылку, #}
-        {# которая ведёт на страницу статьи #}
-{#        <p>{{ task.description }}: <a href="{% url "task_view" task.id %}">{{ task.description }}</a></p>#}
-{#    {% endfor %}#}
-{#{% endblock content %}#}

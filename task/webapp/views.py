@@ -4,7 +4,6 @@ from webapp.models import Task, STATUS_CHOICES
 from webapp.forms import TaskForm, TaskDeleteForm
 
 
-
 def index_view(request):
     tasks = Task.objects.all()
     return render(request, 'index.html', context={'tasks': tasks})
@@ -16,23 +15,21 @@ def task_view(request, pk):
 
 
 def task_create_view(request):
-    if request.method == "GET":  # Если метод запроса GET - будет отображена форма создания статьи
+    if request.method == "GET":
         form = TaskForm()
         return render(request, 'task_create.html', {'stat': STATUS_CHOICES})
-    elif request.method == "POST":  # Если метод запроса POST - будет отображён шаблон просмотра деталей статьи
+    elif request.method == "POST":
         form = TaskForm(data=request.POST)
-
         if form.is_valid():
             task = Task.objects.create(
-            description =form.cleaned_data.get("description"),
-            status = form.cleaned_data.get("status"),
-            date_done = form.cleaned_data.get("date_done"),
-            detailed_description = form.cleaned_data.get("detailed_description")
+                description=form.cleaned_data.get("description"),
+                status=form.cleaned_data.get("status"),
+                date_done=form.cleaned_data.get("date_done"),
+                detailed_description=form.cleaned_data.get("detailed_description")
             )
 
-            return redirect('article-view',pk=task.id)
-        return render(request, 'task_create.html',context={'form': form})
-
+            return redirect('task_view', pk=task.id)
+        return render(request, 'task_create.html', context={'form': form})
 
 
 def task_update_view(request, pk):
@@ -44,8 +41,8 @@ def task_update_view(request, pk):
             'detailed_description': task.detailed_description,
             'status': task.status,
             'date_done': task.date_done
-            })
-        return render(request, 'task_update.html',context={'form': form, 'task': task})
+        })
+        return render(request, 'task_update.html', context={'form': form, 'task': task})
     elif request.method == 'POST':
         form = TaskForm(data=request.POST)
         if form.is_valid():
@@ -54,7 +51,7 @@ def task_update_view(request, pk):
             task.status = form.cleaned_data.get("status")
             task.date_done = form.cleaned_data.get("date_done")
             task.save()
-            return redirect('article-view', pk=task.id)
+            return redirect('task_view', pk=task.id)
         return render(request, 'task_update.html', context={'form': form, 'task': task})
 
 
@@ -73,5 +70,3 @@ def task_delete_view(request, pk):
             task.delete()
             return redirect('task_list')
         return render(request, 'task_delete.html', context={'task': task, 'form': form})
-
-

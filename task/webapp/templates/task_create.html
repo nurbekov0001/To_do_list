@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Введите Задачу </h1>
-<form action="/task/add/" method="post">
+<form action="{% url 'task_add' %}" method="post">
     {% csrf_token %}
     <label>Description:</label><br/>
     <textarea name="description"></textarea><br/>
@@ -23,13 +23,3 @@
 </form>
 {% endblock %}
 
-
-{#{% extends 'base.html' %}#}
-{##}
-{#{% block page_header %}Добавить задачии{% endblock page_header %}#}
-{##}
-{#{% block content %}#}
-{#    <form action="task/add/" method="post">#}
-{#        {% include "task_form.html" with button_text="Создать задачу" %}#}
-{#    </form>#}
-{#{% endblock content %}#}
