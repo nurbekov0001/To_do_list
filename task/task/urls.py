@@ -14,13 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from webapp.views import task_view, task_create_view,index_view
-
+from django.urls import path, include
+from django.views.generic import RedirectView
+HOMEPAGE_URL = 'task/'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index_view, name='task_list'),
-    path('task/<int:pk>', task_view, name='task_view'),
-    path('task/add/', task_create_view, name='task_add')
+    path('task/', include('webapp.urls')),
+    path('', RedirectView.as_view(url=HOMEPAGE_URL, permanent=True)),
+
+
 ]
