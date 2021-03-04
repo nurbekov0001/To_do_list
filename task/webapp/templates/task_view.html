@@ -7,10 +7,9 @@
     <li><a href="{% url "task_update" task.id %}">Редактировать задачу</a></li>
     <li><a href="{% url "task_delete" task.id %}">Удалить задачу</a></li>
 {% endblock menu %}
-
+{% block content %}
 {% block page_header %}Статья {{ task.id }}{% endblock page_header %}
 
-{% block content %}
 
     <p>Description: {{ task.description}}</p>
         <p>Detailed description: {{ task.detailed_description}}</p>
